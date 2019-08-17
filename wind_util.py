@@ -18,9 +18,12 @@ def wss_to_df(wss):
     df['CODE'] = wss.Codes
     return df
 
+def wsd_to_df(wsd):
+    return (pd.DataFrame(data=wsd.Data, columns=wsd.Times, index=wsd.Codes)).T
+
 def topy_date(date):
     if type(date) == ql.Date:
-        return datetime.date(date.year, date.month, date.dayOfMonth)
+        return datetime.date(date.year(), date.month(), date.dayOfMonth())
     else:
         return date
 

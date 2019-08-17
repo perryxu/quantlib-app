@@ -45,7 +45,7 @@ today = shibor_curve.referenceDate()
 end = today + Period(2,Years)
 # better way to generate a series of dates than using schedule
 dates = [Date(serial) for serial in range(today.serialNumber(),end.serialNumber()+1)]
-shibor_fwd_1d = [shibor_curve.forwardRate(d,china.advance(d,30,Days),Actual360(),Simple).rate() for d in dates]
+shibor_fwd_1d = [shibor_curve.forwardRate(d,china.advance(d,1,Days),Actual360(),Simple).rate() for d in dates]
 dates_ax = [wu.topy_date(i) for i in dates]
 plt.figure()
 plt.plot(dates_ax,shibor_fwd_1d)

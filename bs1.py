@@ -144,7 +144,9 @@ if __name__ == '__main__':
 #    upnt.setPricingEngine(ql.BinomialBarrierEngine(bsm_process,'crr',400))
 #    downnt.setPricingEngine(ql.BinomialBarrierEngine(bsm_process,'crr',400))
 
-    dnt.setPricingEngine(ql.BinomialDoubleBarrierEngine(bsm_process,'crr',400))
+    mcEngine = ql.MCBarrierEngine(bsm_process,timeSteps=10,timeStepsPerYear=10,brownianBridge=False,requiredSamples=(2**16-1),maxSamples=(2**20-1),antitheticVariate=False,isBiased=False,requiredTolerance=0.001,seed=5)
+    dnt.setPricingEngine(ql.BinomialDoubleBarrierEngine(mcEngine))
+#    dnt.setPricingEngine(ql.BinomialDoubleBarrierEngine(bsm_process,'crr',400))
     upnt.setPricingEngine(ql.BinomialBarrierEngine(bsm_process,'crr',400))
     downnt.setPricingEngine(ql.BinomialBarrierEngine(bsm_process,'crr',400))
     print(dnt.NPV())
